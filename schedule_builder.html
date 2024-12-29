@@ -80,6 +80,7 @@
                         <th>Day</th>
                         <th>Start Time</th>
                         <th>End Time</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -174,6 +175,14 @@
                     newRow.insertCell(1).textContent = item.day;
                     newRow.insertCell(2).textContent = item.startTime;
                     newRow.insertCell(3).textContent = item.endTime;
+                    const removeButton = document.createElement('button');
+                    removeButton.textContent = 'x';
+                    removeButton.onclick = function () {
+                        const index = Array.from(table.rows).indexOf(newRow);
+                        data.splice(index, 1);
+                        updateTable(tableId, data);
+                    };
+                    newRow.insertCell(4).appendChild(removeButton);
                 });
             }
 
