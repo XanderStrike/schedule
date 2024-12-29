@@ -26,21 +26,6 @@ document.getElementById('downloadBackup').addEventListener('click', function () 
     downloadAnchorNode.click();
     downloadAnchorNode.remove();
 });
-    event.preventDefault();
-    const employeeName = document.getElementById('employeeName').value;
-    const availabilityDay = document.getElementById('availabilityDay').value;
-    const availabilityStartTime = document.getElementById('availabilityStartTime').value;
-    const availabilityEndTime = document.getElementById('availabilityEndTime').value;
-    const availability = {
-        name: employeeName,
-        day: availabilityDay,
-        startTime: availabilityStartTime,
-        endTime: availabilityEndTime
-    };
-    availabilities.push(availability);
-    updateAvailabilityTable();
-    generateSchedule();
-});
 
 document.getElementById('shiftForm').addEventListener('submit', function (event) {
     event.preventDefault();
