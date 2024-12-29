@@ -151,8 +151,20 @@
             </div>
 
         <script>
-            const shifts = [];
-            const availabilities = [];
+            const shifts = [
+                { name: "Morning Shift", day: "Monday", startTime: "09:00", endTime: "13:00" },
+                { name: "Afternoon Shift", day: "Monday", startTime: "13:00", endTime: "17:00" },
+                { name: "Evening Shift", day: "Monday", startTime: "17:00", endTime: "21:00" },
+                { name: "Morning Shift", day: "Tuesday", startTime: "09:00", endTime: "13:00" },
+                { name: "Afternoon Shift", day: "Tuesday", startTime: "13:00", endTime: "17:00" }
+            ];
+
+            const availabilities = [
+                { name: "Alice", day: "Monday", startTime: "09:00", endTime: "17:00" },
+                { name: "Bob", day: "Monday", startTime: "13:00", endTime: "21:00" },
+                { name: "Charlie", day: "Tuesday", startTime: "09:00", endTime: "17:00" },
+                { name: "Dana", day: "Tuesday", startTime: "13:00", endTime: "21:00" }
+            ];
 
             document.getElementById('employeeForm').addEventListener('submit', function (event) {
                 event.preventDefault();
