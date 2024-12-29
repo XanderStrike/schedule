@@ -11,19 +11,21 @@ Aided by Aider.
 - Generate a schedule based on availabilities and shifts.
 - Download and upload backup JSON files of the schedule data.
 
-## Setup
+## Docker Usage
 
-1. Clone the repository:
+To run the application using Docker, you can pull the pre-built image from Docker Hub and run it as follows:
+
+1. Pull the Docker image:
    ```bash
-   git clone <repository-url>
+   docker pull xanderstrike/schedule:latest
    ```
 
-2. Navigate to the project directory:
+2. Run the Docker container:
    ```bash
-   cd <project-directory>
+   docker run -p 8080:80 xanderstrike/schedule:latest
    ```
 
-3. Open `schedule_builder.html` in a web browser to use the application.
+3. Open your web browser and navigate to `http://localhost:8080` to use the application.
 
 ## Usage
 
