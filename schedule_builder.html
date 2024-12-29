@@ -118,8 +118,9 @@
             event.preventDefault();
             const shiftName = document.getElementById('shiftName').value;
             const shiftDay = document.getElementById('shiftDay').value;
+            const startTime = document.getElementById('startTime').value;
             const endTime = document.getElementById('endTime').value;
-            addShiftToSchedule(shiftName, startTime, endTime);
+            addShiftToSchedule(shiftName, shiftDay, startTime, endTime);
         });
 
         function addEmployeeToSchedule(name, day, startTime, endTime) {
