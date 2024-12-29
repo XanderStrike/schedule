@@ -2,6 +2,8 @@
 
 This project is a web-based tool for building employee schedules based on their availabilities and predefined shifts. It allows users to add employees and shifts, generate a schedule, and download or upload backups of the data.
 
+Aided by Aider.
+
 ## Features
 
 - Add and manage employee availabilities.
