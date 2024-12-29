@@ -41,7 +41,6 @@ document.getElementById('downloadBackup').addEventListener('click', function () 
     updateAvailabilityTable();
     generateSchedule();
 });
-});
 
 document.getElementById('shiftForm').addEventListener('submit', function (event) {
     event.preventDefault();
