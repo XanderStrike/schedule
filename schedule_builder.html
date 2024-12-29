@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schedule Builder</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .form-section {
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .form-section h2 {
+            margin-top: 0;
+        }
+        .schedule {
+            margin-top: 20px;
+        }
+        .schedule table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .schedule th, .schedule td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Schedule Builder</h1>
+        
+        <div class="form-section">
+            <h2>Add Employee</h2>
+            <form id="employeeForm">
+                <label for="employeeName">Name:</label>
+                <input type="text" id="employeeName" name="employeeName" required>
+                <label for="availability">Availability:</label>
+                <input type="text" id="availability" name="availability" placeholder="e.g., Mon-Fri" required>
+                <button type="submit">Add Employee</button>
+            </form>
+        </div>
+
+        <div class="form-section">
+            <h2>Add Shift</h2>
+            <form id="shiftForm">
+                <label for="shiftName">Shift Name:</label>
+                <input type="text" id="shiftName" name="shiftName" required>
+                <label for="startTime">Start Time:</label>
+                <input type="time" id="startTime" name="startTime" required>
+                <label for="endTime">End Time:</label>
+                <input type="time" id="endTime" name="endTime" required>
+                <button type="submit">Add Shift</button>
+            </form>
+        </div>
+
+        <div class="schedule">
+            <h2>Schedule</h2>
+            <table id="scheduleTable">
+                <thead>
+                    <tr>
+                        <th>Employee</th>
+                        <th>Availability</th>
+                        <th>Shift</th>
+                        <th>Start Time</th>
+                        <th>End Time</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Schedule entries will be added here -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('employeeForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const employeeName = document.getElementById('employeeName').value;
+            const availability = document.getElementById('availability').value;
+            addEmployeeToSchedule(employeeName, availability);
+        });
+
+        document.getElementById('shiftForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const shiftName = document.getElementById('shiftName').value;
+            const startTime = document.getElementById('startTime').value;
+            const endTime = document.getElementById('endTime').value;
+            addShiftToSchedule(shiftName, startTime, endTime);
+        });
+
+        function addEmployeeToSchedule(name, availability) {
+            const table = document.getElementById('scheduleTable').getElementsByTagName('tbody')[0];
+            const newRow = table.insertRow();
+            newRow.insertCell(0).textContent = name;
+            newRow.insertCell(1).textContent = availability;
+            newRow.insertCell(2).textContent = '';
+            newRow.insertCell(3).textContent = '';
+            newRow.insertCell(4).textContent = '';
+        }
+
+        function addShiftToSchedule(shiftName, startTime, endTime) {
+            const table = document.getElementById('scheduleTable').getElementsByTagName('tbody')[0];
+            const newRow = table.insertRow();
+            newRow.insertCell(0).textContent = '';
+            newRow.insertCell(1).textContent = '';
+            newRow.insertCell(2).textContent = shiftName;
+            newRow.insertCell(3).textContent = startTime;
+            newRow.insertCell(4).textContent = endTime;
+        }
+    </script>
+</body>
+</html>
