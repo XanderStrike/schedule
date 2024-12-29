@@ -231,6 +231,7 @@
         // populate with test data on page load
         updateAvailabilityTable();
         updateShiftTable();
+        generateSchedule();
 
         document.getElementById('generateScheduleButton').addEventListener('click', function () {
             generateSchedule();
@@ -283,16 +284,26 @@
                 newRow.insertCell(4).textContent = entry.endTime;
             });
 
-            const unmatchedContainer = document.createElement('div');
-            unmatchedContainer.style.color = 'red';
-            unmatchedContainer.style.marginTop = '20px';
-            unmatchedContainer.innerHTML = '<h3>Unmatched Shifts</h3>';
-            unmatchedShifts.forEach(shift => {
-                const shiftInfo = document.createElement('p');
-                shiftInfo.textContent = `${shift.name} on ${shift.day} from ${shift.startTime} to ${shift.endTime}`;
-                unmatchedContainer.appendChild(shiftInfo);
-            });
-            table.parentElement.appendChild(unmatchedContainer);
+            let unmatchedContainer = document.querySelector('#unmatched-shifts');
+            if (!unmatchedContainer) {
+                unmatchedContainer = document.createElement('div');
+                unmatchedContainer.id = 'unmatched-shifts';
+                unmatchedContainer.style.marginTop = '20px';
+                table.parentElement.appendChild(unmatchedContainer);
+            }
+            unmatchedContainer.innerHTML = '';
+            if (unmatchedShifts.length > 0) {
+                unmatchedContainer.style.color = 'red';
+                unmatchedContainer.innerHTML = '<h3>Unmatched Shifts</h3>';
+                unmatchedShifts.forEach(shift => {
+                    const shiftInfo = document.createElement('p');
+                    shiftInfo.textContent = `${shift.name} on ${shift.day} from ${shift.startTime} to ${shift.endTime}`;
+                    unmatchedContainer.appendChild(shiftInfo);
+                });
+            } else {
+                unmatchedContainer.style.color = 'green';
+                unmatchedContainer.innerHTML = '<h3>No Unmatched Shifts!</h3>';
+            }
         }
     </script>
 </body>
