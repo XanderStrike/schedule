@@ -139,7 +139,14 @@
                 const availabilityDay = document.getElementById('availabilityDay').value;
                 const availabilityStartTime = document.getElementById('availabilityStartTime').value;
                 const availabilityEndTime = document.getElementById('availabilityEndTime').value;
-                addEmployeeToSchedule(employeeName, availabilityDay, availabilityStartTime, availabilityEndTime);
+                const availability = {
+                    name: employeeName,
+                    day: availabilityDay,
+                    startTime: availabilityStartTime,
+                    endTime: availabilityEndTime
+                };
+                availabilities.push(availability);
+                updateAvailabilityTable();
             });
 
             document.getElementById('shiftForm').addEventListener('submit', function (event) {
@@ -148,17 +155,39 @@
                 const shiftDay = document.getElementById('shiftDay').value;
                 const startTime = document.getElementById('startTime').value;
                 const endTime = document.getElementById('endTime').value;
-                addShiftToSchedule(shiftName, shiftDay, startTime, endTime);
+                const shift = {
+                    name: shiftName,
+                    day: shiftDay,
+                    startTime: startTime,
+                    endTime: endTime
+                };
+                shifts.push(shift);
+                updateShiftTable();
             });
 
-            function addEmployeeToSchedule(name, day, startTime, endTime) {
-                const availability = {
-                    name: employeeName,
-                    day: availabilityDay,
-                    startTime: availabilityStartTime,
-                    endTime: availabilityEndTime
-                };
-                availabilities.push(availability);
+            function updateAvailabilityTable() {
+                const table = document.getElementById('availabilityTable').getElementsByTagName('tbody')[0];
+                table.innerHTML = '';
+                availabilities.forEach(availability => {
+                    const newRow = table.insertRow();
+                    newRow.insertCell(0).textContent = availability.name;
+                    newRow.insertCell(1).textContent = availability.day;
+                    newRow.insertCell(2).textContent = availability.startTime;
+                    newRow.insertCell(3).textContent = availability.endTime;
+                });
+            }
+
+            function updateShiftTable() {
+                const table = document.getElementById('shiftTable').getElementsByTagName('tbody')[0];
+                table.innerHTML = '';
+                shifts.forEach(shift => {
+                    const newRow = table.insertRow();
+                    newRow.insertCell(0).textContent = shift.name;
+                    newRow.insertCell(1).textContent = shift.day;
+                    newRow.insertCell(2).textContent = shift.startTime;
+                    newRow.insertCell(3).textContent = shift.endTime;
+                });
+            }
 
                 const table = document.getElementById('availabilityTable').getElementsByTagName('tbody')[0];
                 const newRow = table.insertRow();
