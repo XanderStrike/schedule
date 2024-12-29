@@ -248,7 +248,8 @@
                 const availableEmployees = availabilities.filter(availability =>
                     availability.day === shift.day &&
                     availability.startTime <= shift.startTime &&
-                    availability.endTime >= shift.endTime
+                    availability.endTime >= shift.endTime &&
+                    !scheduledEmployees[availability.name]?.includes(shift.day)
                 );
                 if (availableEmployees.length > 0) {
                     const selectedEmployee = getRandomElement(availableEmployees);
@@ -259,11 +260,10 @@
                         startTime: shift.startTime,
                         endTime: shift.endTime
                     });
-                    scheduledEmployees[selectedEmployee.name] = {
-                        day: shift.day,
-                        startTime: shift.startTime,
-                        endTime: shift.endTime
-                    };
+                    if (!scheduledEmployees[selectedEmployee.name]) {
+                        scheduledEmployees[selectedEmployee.name] = [];
+                    }
+                    scheduledEmployees[selectedEmployee.name].push(shift.day);
                 } else {
                     unmatchedShifts.push(shift);
                 }
