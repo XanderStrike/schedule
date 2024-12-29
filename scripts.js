@@ -13,6 +13,40 @@ let availabilities = JSON.parse(localStorage.getItem('availabilities')) || [
     { name: "Dana", day: "Tuesday", startTime: "13:00", endTime: "21:00" }
 ];
 
+document.getElementById('shiftForm').addEventListener('submit', function (event) {
+        event.preventDefault();
+        const shiftName = document.getElementById('shiftName').value;
+        const shiftDay = document.getElementById('shiftDay').value;
+        const startTime = document.getElementById('startTime').value;
+        const endTime = document.getElementById('endTime').value;
+        const shift = {
+            name: shiftName,
+            day: shiftDay,
+            startTime: startTime,
+            endTime: endTime
+        };
+        shifts.push(shift);
+        updateShiftTable();
+        generateSchedule();
+});
+
+document.getElementById('employeeForm').addEventListener('submit', function (event) {
+    event.preventDefault();
+    const employeeName = document.getElementById('employeeName').value;
+    const availabilityDay = document.getElementById('availabilityDay').value;
+    const availabilityStartTime = document.getElementById('availabilityStartTime').value;
+    const availabilityEndTime = document.getElementById('availabilityEndTime').value;
+    const availability = {
+        name: employeeName,
+        day: availabilityDay,
+        startTime: availabilityStartTime,
+        endTime: availabilityEndTime
+    };
+    availabilities.push(availability);
+    updateAvailabilityTable();
+    generateSchedule();
+});
+
 document.getElementById('downloadBackup').addEventListener('click', function () {
     const data = {
         shifts: shifts,
@@ -27,21 +61,32 @@ document.getElementById('downloadBackup').addEventListener('click', function () 
     downloadAnchorNode.remove();
 });
 
-document.getElementById('shiftForm').addEventListener('submit', function (event) {
-    event.preventDefault();
-    const shiftName = document.getElementById('shiftName').value;
-    const shiftDay = document.getElementById('shiftDay').value;
-    const startTime = document.getElementById('startTime').value;
-    const endTime = document.getElementById('endTime').value;
-    const shift = {
-        name: shiftName,
-        day: shiftDay,
-        startTime: startTime,
-        endTime: endTime
-    };
-    shifts.push(shift);
-    updateShiftTable();
-    generateSchedule();
+document.getElementById('uploadBackupButton').addEventListener('click', function () {
+    const fileInput = document.getElementById('uploadBackup');
+    const file = fileInput.files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+            try {
+                const data = JSON.parse(e.target.result);
+                if (data.shifts && data.availabilities) {
+                    shifts = data.shifts;
+                    availabilities = data.availabilities;
+                    updateShiftTable();
+                    updateAvailabilityTable();
+                    generateSchedule();
+                    alert('Backup uploaded successfully!');
+                } else {
+                    alert('Invalid backup file format.');
+                }
+            } catch (error) {
+                alert('Error reading backup file.');
+            }
+        };
+        reader.readAsText(file);
+    } else {
+        alert('Please select a file to upload.');
+    }
 });
 
 function updateTable(tableId, data) {

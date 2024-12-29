@@ -15,7 +15,12 @@
         <p>Use this tool to generate a schedule given a list of employee availabilities and shifts.</p>
         <p>Note that this does not take into account any labor laws, overtime, etc.</p>
 
-        <p>Data is stored in your browser. That means nobody else can see what you see, but it will be here when you get back (unless you clear your browser data).</p>
+        <p>
+            Data is stored in your browser. That means nobody else can see what
+            you see, but it will be here when you get back (unless you clear your
+            browser data). You can download the shift and availability data to your
+            computer below.
+        </p>
 
         <div class="schedule">
             <h2>Employee Availability</h2>
@@ -34,9 +39,9 @@
                         <option value="Saturday">Saturday</option>
                         <option value="Sunday">Sunday</option>
                     </select>
-                    <label for="availabilityStartTime">Start Time:</label>
+                    <label for="availabilityStartTime">Start:</label>
                     <input type="time" id="availabilityStartTime" name="availabilityStartTime" required>
-                    <label for="availabilityEndTime">End Time:</label>
+                    <label for="availabilityEndTime">End:</label>
                     <input type="time" id="availabilityEndTime" name="availabilityEndTime" required>
                     <button type="submit">Add Employee</button>
                 </form>
@@ -74,8 +79,9 @@
                     <option value="Saturday">Saturday</option>
                     <option value="Sunday">Sunday</option>
                 </select>
+                <label for="startTime">Start:</label>
                 <input type="time" id="startTime" name="startTime" required>
-                <label for="endTime">End Time:</label>
+                <label for="endTime">End:</label>
                 <input type="time" id="endTime" name="endTime" required>
                 <button type="submit">Add Shift</button>
             </form>
@@ -117,8 +123,14 @@
                 </tbody>
             </table>
         </div>
-        <button id="downloadBackup">Download Backup</button>
+        <hr>
+        <div>
+            <button id="downloadBackup">Download Backup</button>
+            <input type="file" id="uploadBackup" accept=".json">
+            <button id="uploadBackupButton">Upload Backup</button>
+        </div>
     </div>
+
 
     <script src="scripts.js"></script>
 </body>
