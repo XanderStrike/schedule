@@ -165,53 +165,24 @@
                 updateShiftTable();
             });
 
-            function updateAvailabilityTable() {
-                const table = document.getElementById('availabilityTable').getElementsByTagName('tbody')[0];
+            function updateTable(tableId, data) {
+                const table = document.getElementById(tableId).getElementsByTagName('tbody')[0];
                 table.innerHTML = '';
-                availabilities.forEach(availability => {
+                data.forEach(item => {
                     const newRow = table.insertRow();
-                    newRow.insertCell(0).textContent = availability.name;
-                    newRow.insertCell(1).textContent = availability.day;
-                    newRow.insertCell(2).textContent = availability.startTime;
-                    newRow.insertCell(3).textContent = availability.endTime;
+                    newRow.insertCell(0).textContent = item.name;
+                    newRow.insertCell(1).textContent = item.day;
+                    newRow.insertCell(2).textContent = item.startTime;
+                    newRow.insertCell(3).textContent = item.endTime;
                 });
+            }
+
+            function updateAvailabilityTable() {
+                updateTable('availabilityTable', availabilities);
             }
 
             function updateShiftTable() {
-                const table = document.getElementById('shiftTable').getElementsByTagName('tbody')[0];
-                table.innerHTML = '';
-                shifts.forEach(shift => {
-                    const newRow = table.insertRow();
-                    newRow.insertCell(0).textContent = shift.name;
-                    newRow.insertCell(1).textContent = shift.day;
-                    newRow.insertCell(2).textContent = shift.startTime;
-                    newRow.insertCell(3).textContent = shift.endTime;
-                });
-            }
-
-                const table = document.getElementById('availabilityTable').getElementsByTagName('tbody')[0];
-                const newRow = table.insertRow();
-                newRow.insertCell(0).textContent = name;
-                newRow.insertCell(1).textContent = day;
-                newRow.insertCell(2).textContent = startTime;
-                newRow.insertCell(3).textContent = endTime;
-            }
-
-            function addShiftToSchedule(shiftName, day, startTime, endTime) {
-                const shift = {
-                    name: shiftName,
-                    day: day,
-                    startTime: startTime,
-                    endTime: endTime
-                };
-                shifts.push(shift);
-
-                const table = document.getElementById('shiftTable').getElementsByTagName('tbody')[0];
-                const newRow = table.insertRow();
-                newRow.insertCell(0).textContent = shiftName;
-                newRow.insertCell(1).textContent = day;
-                newRow.insertCell(2).textContent = startTime;
-                newRow.insertCell(3).textContent = endTime;
+                updateTable('shiftTable', shifts);
             }
         </script>
 </body>
