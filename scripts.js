@@ -27,6 +27,7 @@ document.getElementById('employeeForm').addEventListener('submit', function (eve
     };
     availabilities.push(availability);
     updateAvailabilityTable();
+    generateSchedule();
 });
 
 document.getElementById('shiftForm').addEventListener('submit', function (event) {
@@ -43,6 +44,7 @@ document.getElementById('shiftForm').addEventListener('submit', function (event)
     };
     shifts.push(shift);
     updateShiftTable();
+    generateSchedule();
 });
 
 function updateTable(tableId, data) {
@@ -77,10 +79,6 @@ function updateShiftTable() {
 updateAvailabilityTable();
 updateShiftTable();
 generateSchedule();
-
-document.getElementById('generateScheduleButton').addEventListener('click', function () {
-    generateSchedule();
-});
 
 function generateSchedule() {
     function getRandomElement(arr) {
