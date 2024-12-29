@@ -131,6 +131,7 @@
 
         <script>
             const shifts = [];
+            const availabilities = [];
 
             document.getElementById('employeeForm').addEventListener('submit', function (event) {
                 event.preventDefault();
@@ -151,6 +152,14 @@
             });
 
             function addEmployeeToSchedule(name, day, startTime, endTime) {
+                const availability = {
+                    name: employeeName,
+                    day: availabilityDay,
+                    startTime: availabilityStartTime,
+                    endTime: availabilityEndTime
+                };
+                availabilities.push(availability);
+
                 const table = document.getElementById('availabilityTable').getElementsByTagName('tbody')[0];
                 const newRow = table.insertRow();
                 newRow.insertCell(0).textContent = name;
