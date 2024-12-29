@@ -13,7 +13,19 @@ let availabilities = JSON.parse(localStorage.getItem('availabilities')) || [
     { name: "Dana", day: "Tuesday", startTime: "13:00", endTime: "21:00" }
 ];
 
-document.getElementById('employeeForm').addEventListener('submit', function (event) {
+document.getElementById('downloadBackup').addEventListener('click', function () {
+    const data = {
+        shifts: shifts,
+        availabilities: availabilities
+    };
+    const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(data));
+    const downloadAnchorNode = document.createElement('a');
+    downloadAnchorNode.setAttribute("href", dataStr);
+    downloadAnchorNode.setAttribute("download", "schedule_backup.json");
+    document.body.appendChild(downloadAnchorNode);
+    downloadAnchorNode.click();
+    downloadAnchorNode.remove();
+});
     event.preventDefault();
     const employeeName = document.getElementById('employeeName').value;
     const availabilityDay = document.getElementById('availabilityDay').value;
