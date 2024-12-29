@@ -9,31 +9,7 @@
         body {
             font-family: Arial, sans-serif;
             margin: 20px;
-            updateGeneratedScheduleTable(schedule, unmatchedShifts);
         }
-
-        function updateGeneratedScheduleTable(schedule, unmatchedShifts) {
-            const table = document.getElementById('generatedScheduleTable').getElementsByTagName('tbody')[0];
-            table.innerHTML = '';
-            schedule.forEach(entry => {
-                const newRow = table.insertRow();
-                newRow.insertCell(0).textContent = entry.employee;
-                newRow.insertCell(1).textContent = entry.shiftName;
-                newRow.insertCell(2).textContent = entry.day;
-                newRow.insertCell(3).textContent = entry.startTime;
-                newRow.insertCell(4).textContent = entry.endTime;
-            });
-
-            const unmatchedContainer = document.createElement('div');
-            unmatchedContainer.style.color = 'red';
-            unmatchedContainer.style.marginTop = '20px';
-            unmatchedContainer.innerHTML = '<h3>Unmatched Shifts</h3>';
-            unmatchedShifts.forEach(shift => {
-                const shiftInfo = document.createElement('p');
-                shiftInfo.textContent = `${shift.name} on ${shift.day} from ${shift.startTime} to ${shift.endTime}`;
-                unmatchedContainer.appendChild(shiftInfo);
-            });
-            table.parentElement.appendChild(unmatchedContainer);
 
         .container {
             max-width: 800px;
@@ -270,29 +246,27 @@
                     availability.startTime <= shift.startTime &&
                     availability.endTime >= shift.endTime
                 );
-                if (availableEmployee) {
-                    if (!scheduledEmployees[availableEmployee.name]) {
-                        schedule.push({
-                            employee: availableEmployee.name,
-                            shiftName: shift.name,
-                            day: shift.day,
-                            startTime: shift.startTime,
-                            endTime: shift.endTime
-                        });
-                        scheduledEmployees[availableEmployee.name] = {
-                            day: shift.day,
-                            startTime: shift.startTime,
-                            endTime: shift.endTime
-                        };
-                    }
+                if (availableEmployee && !scheduledEmployees[availableEmployee.name]) {
+                    schedule.push({
+                        employee: availableEmployee.name,
+                        shiftName: shift.name,
+                        day: shift.day,
+                        startTime: shift.startTime,
+                        endTime: shift.endTime
+                    });
+                    scheduledEmployees[availableEmployee.name] = {
+                        day: shift.day,
+                        startTime: shift.startTime,
+                        endTime: shift.endTime
+                    };
                 } else {
                     unmatchedShifts.push(shift);
                 }
             });
-            updateGeneratedScheduleTable(schedule);
+            updateGeneratedScheduleTable(schedule, unmatchedShifts);
         }
 
-        function updateGeneratedScheduleTable(schedule) {
+        function updateGeneratedScheduleTable(schedule, unmatchedShifts) {
             const table = document.getElementById('generatedScheduleTable').getElementsByTagName('tbody')[0];
             table.innerHTML = '';
             schedule.forEach(entry => {
@@ -303,6 +277,17 @@
                 newRow.insertCell(3).textContent = entry.startTime;
                 newRow.insertCell(4).textContent = entry.endTime;
             });
+
+            const unmatchedContainer = document.createElement('div');
+            unmatchedContainer.style.color = 'red';
+            unmatchedContainer.style.marginTop = '20px';
+            unmatchedContainer.innerHTML = '<h3>Unmatched Shifts</h3>';
+            unmatchedShifts.forEach(shift => {
+                const shiftInfo = document.createElement('p');
+                shiftInfo.textContent = `${shift.name} on ${shift.day} from ${shift.startTime} to ${shift.endTime}`;
+                unmatchedContainer.appendChild(shiftInfo);
+            });
+            table.parentElement.appendChild(unmatchedContainer);
         }
     </script>
 </body>
