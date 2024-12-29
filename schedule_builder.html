@@ -237,24 +237,29 @@
         });
 
         function generateSchedule() {
+            function getRandomElement(arr) {
+                return arr[Math.floor(Math.random() * arr.length)];
+            }
+
             const schedule = [];
             const scheduledEmployees = {};
             const unmatchedShifts = [];
             shifts.forEach(shift => {
-                const availableEmployee = availabilities.find(availability =>
+                const availableEmployees = availabilities.filter(availability =>
                     availability.day === shift.day &&
                     availability.startTime <= shift.startTime &&
                     availability.endTime >= shift.endTime
                 );
-                if (availableEmployee && !scheduledEmployees[availableEmployee.name]) {
+                if (availableEmployees.length > 0) {
+                    const selectedEmployee = getRandomElement(availableEmployees);
                     schedule.push({
-                        employee: availableEmployee.name,
+                        employee: selectedEmployee.name,
                         shiftName: shift.name,
                         day: shift.day,
                         startTime: shift.startTime,
                         endTime: shift.endTime
                     });
-                    scheduledEmployees[availableEmployee.name] = {
+                    scheduledEmployees[selectedEmployee.name] = {
                         day: shift.day,
                         startTime: shift.startTime,
                         endTime: shift.endTime
