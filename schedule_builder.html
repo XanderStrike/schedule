@@ -45,8 +45,20 @@
             <form id="employeeForm">
                 <label for="employeeName">Name:</label>
                 <input type="text" id="employeeName" name="employeeName" required>
-                <label for="availability">Availability:</label>
-                <input type="text" id="availability" name="availability" placeholder="e.g., Mon-Fri" required>
+                <label for="availabilityDay">Day:</label>
+                <select id="availabilityDay" name="availabilityDay" required>
+                    <option value="Monday">Monday</option>
+                    <option value="Tuesday">Tuesday</option>
+                    <option value="Wednesday">Wednesday</option>
+                    <option value="Thursday">Thursday</option>
+                    <option value="Friday">Friday</option>
+                    <option value="Saturday">Saturday</option>
+                    <option value="Sunday">Sunday</option>
+                </select>
+                <label for="availabilityStartTime">Start Time:</label>
+                <input type="time" id="availabilityStartTime" name="availabilityStartTime" required>
+                <label for="availabilityEndTime">End Time:</label>
+                <input type="time" id="availabilityEndTime" name="availabilityEndTime" required>
                 <button type="submit">Add Employee</button>
             </form>
         </div>
@@ -56,7 +68,16 @@
             <form id="shiftForm">
                 <label for="shiftName">Shift Name:</label>
                 <input type="text" id="shiftName" name="shiftName" required>
-                <label for="startTime">Start Time:</label>
+                <label for="shiftDay">Day:</label>
+                <select id="shiftDay" name="shiftDay" required>
+                    <option value="Monday">Monday</option>
+                    <option value="Tuesday">Tuesday</option>
+                    <option value="Wednesday">Wednesday</option>
+                    <option value="Thursday">Thursday</option>
+                    <option value="Friday">Friday</option>
+                    <option value="Saturday">Saturday</option>
+                    <option value="Sunday">Sunday</option>
+                </select>
                 <input type="time" id="startTime" name="startTime" required>
                 <label for="endTime">End Time:</label>
                 <input type="time" id="endTime" name="endTime" required>
@@ -87,33 +108,34 @@
         document.getElementById('employeeForm').addEventListener('submit', function(event) {
             event.preventDefault();
             const employeeName = document.getElementById('employeeName').value;
-            const availability = document.getElementById('availability').value;
-            addEmployeeToSchedule(employeeName, availability);
+            const availabilityDay = document.getElementById('availabilityDay').value;
+            const availabilityStartTime = document.getElementById('availabilityStartTime').value;
+            const availabilityEndTime = document.getElementById('availabilityEndTime').value;
+            addEmployeeToSchedule(employeeName, availabilityDay, availabilityStartTime, availabilityEndTime);
         });
 
         document.getElementById('shiftForm').addEventListener('submit', function(event) {
             event.preventDefault();
             const shiftName = document.getElementById('shiftName').value;
-            const startTime = document.getElementById('startTime').value;
+            const shiftDay = document.getElementById('shiftDay').value;
             const endTime = document.getElementById('endTime').value;
             addShiftToSchedule(shiftName, startTime, endTime);
         });
 
-        function addEmployeeToSchedule(name, availability) {
+        function addEmployeeToSchedule(name, day, startTime, endTime) {
             const table = document.getElementById('scheduleTable').getElementsByTagName('tbody')[0];
             const newRow = table.insertRow();
             newRow.insertCell(0).textContent = name;
-            newRow.insertCell(1).textContent = availability;
-            newRow.insertCell(2).textContent = '';
-            newRow.insertCell(3).textContent = '';
+            newRow.insertCell(1).textContent = day;
+            newRow.insertCell(2).textContent = startTime;
+            newRow.insertCell(3).textContent = endTime;
             newRow.insertCell(4).textContent = '';
         }
 
-        function addShiftToSchedule(shiftName, startTime, endTime) {
+        function addShiftToSchedule(shiftName, day, startTime, endTime) {
             const table = document.getElementById('scheduleTable').getElementsByTagName('tbody')[0];
             const newRow = table.insertRow();
-            newRow.insertCell(0).textContent = '';
-            newRow.insertCell(1).textContent = '';
+            newRow.insertCell(0).textContent = day;
             newRow.insertCell(2).textContent = shiftName;
             newRow.insertCell(3).textContent = startTime;
             newRow.insertCell(4).textContent = endTime;
