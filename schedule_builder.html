@@ -130,6 +130,8 @@
         </div>
 
         <script>
+            const shifts = [];
+
             document.getElementById('employeeForm').addEventListener('submit', function (event) {
                 event.preventDefault();
                 const employeeName = document.getElementById('employeeName').value;
@@ -158,6 +160,14 @@
             }
 
             function addShiftToSchedule(shiftName, day, startTime, endTime) {
+                const shift = {
+                    name: shiftName,
+                    day: day,
+                    startTime: startTime,
+                    endTime: endTime
+                };
+                shifts.push(shift);
+
                 const table = document.getElementById('shiftTable').getElementsByTagName('tbody')[0];
                 const newRow = table.insertRow();
                 newRow.insertCell(0).textContent = shiftName;
