@@ -219,6 +219,7 @@
 
             function generateSchedule() {
                 const schedule = [];
+                const scheduledEmployees = {};
                 shifts.forEach(shift => {
                     const availableEmployee = availabilities.find(availability =>
                         availability.day === shift.day &&
@@ -226,13 +227,20 @@
                         availability.endTime >= shift.endTime
                     );
                     if (availableEmployee) {
-                        schedule.push({
-                            employee: availableEmployee.name,
-                            shiftName: shift.name,
-                            day: shift.day,
-                            startTime: shift.startTime,
-                            endTime: shift.endTime
-                        });
+                        if (!scheduledEmployees[availableEmployee.name]) {
+                            schedule.push({
+                                employee: availableEmployee.name,
+                                shiftName: shift.name,
+                                day: shift.day,
+                                startTime: shift.startTime,
+                                endTime: shift.endTime
+                            });
+                            scheduledEmployees[availableEmployee.name] = {
+                                day: shift.day,
+                                startTime: shift.startTime,
+                                endTime: shift.endTime
+                            };
+                        }
                     }
                 });
                 updateGeneratedScheduleTable(schedule);
