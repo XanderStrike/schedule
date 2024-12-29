@@ -1,4 +1,4 @@
-const shifts = [
+let shifts = JSON.parse(localStorage.getItem('shifts')) || [
     { name: "Morning Shift", day: "Monday", startTime: "09:00", endTime: "13:00" },
     { name: "Afternoon Shift", day: "Monday", startTime: "13:00", endTime: "17:00" },
     { name: "Evening Shift", day: "Monday", startTime: "17:00", endTime: "21:00" },
@@ -6,7 +6,7 @@ const shifts = [
     { name: "Afternoon Shift", day: "Tuesday", startTime: "13:00", endTime: "17:00" }
 ];
 
-const availabilities = [
+let availabilities = JSON.parse(localStorage.getItem('availabilities')) || [
     { name: "Alice", day: "Monday", startTime: "09:00", endTime: "17:00" },
     { name: "Bob", day: "Monday", startTime: "13:00", endTime: "21:00" },
     { name: "Charlie", day: "Tuesday", startTime: "09:00", endTime: "17:00" },
@@ -62,6 +62,7 @@ function updateTable(tableId, data) {
             const index = Array.from(table.rows).indexOf(newRow);
             data.splice(index, 1);
             updateTable(tableId, data);
+            generateSchedule();
         };
         newRow.insertCell(4).appendChild(removeButton);
     });
@@ -84,6 +85,9 @@ function generateSchedule() {
     function getRandomElement(arr) {
         return arr[Math.floor(Math.random() * arr.length)];
     }
+
+    localStorage.setItem('availabilities', JSON.stringify(availabilities));
+    localStorage.setItem('shifts', JSON.stringify(shifts));
 
     const schedule = [];
     const scheduledEmployees = {};
