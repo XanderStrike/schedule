@@ -36,15 +36,30 @@ h2 {
 
 .form-section {
     margin-bottom: 2rem;
-    padding: 1.5rem;
     border: 1px solid var(--border-color);
     border-radius: 8px;
     background-color: white;
 }
 
-.form-section h2 {
-    margin-top: 0;
+.form-section summary {
+    padding: 1rem 1.5rem;
+    cursor: pointer;
+    font-weight: 500;
     font-size: 1.25rem;
+    user-select: none;
+}
+
+.form-section summary:hover {
+    background-color: var(--background-color);
+}
+
+.form-section form {
+    padding: 1.5rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.form-section[open] summary {
+    border-bottom: 1px solid var(--border-color);
 }
 
 form {

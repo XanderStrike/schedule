@@ -25,8 +25,8 @@
 
         <div class="schedule">
             <h2>Employee Availability</h2>
-            <div class="form-section">
-                <h2>Add Employee</h2>
+            <details class="form-section">
+                <summary>Add Employee</summary>
                 <form id="employeeForm">
                     <label for="employeeName">Name:</label>
                     <input type="text" id="employeeName" name="employeeName" required>
@@ -46,7 +46,7 @@
                     <input type="time" id="availabilityEndTime" name="availabilityEndTime" required>
                     <button type="submit">Add Employee</button>
                 </form>
-            </div>
+            </details>
             <table id="availabilityTable">
                 <thead>
                     <tr>
@@ -65,8 +65,8 @@
 
 
         <h2>Shifts</h2>
-        <div class="form-section">
-            <h2>Add Shift</h2>
+        <details class="form-section">
+            <summary>Add Shift</summary>
             <form id="shiftForm">
                 <label for="shiftName">Shift Name:</label>
                 <input type="text" id="shiftName" name="shiftName" required>
@@ -86,7 +86,7 @@
                 <input type="time" id="endTime" name="endTime" required>
                 <button type="submit">Add Shift</button>
             </form>
-        </div>
+        </details>
 
         <div class="schedule">
             <table id="shiftTable">
