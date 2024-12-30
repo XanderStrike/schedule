@@ -93,6 +93,18 @@ button:hover {
     background-color: #1d4ed8;
 }
 
+.jump-link {
+    display: inline-block;
+    margin-left: 1rem;
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.jump-link:hover {
+    text-decoration: underline;
+}
+
 .schedule {
     margin-top: 2rem;
     overflow-x: auto;
