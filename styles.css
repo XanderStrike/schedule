@@ -69,13 +69,8 @@ form {
     align-items: end;
 }
 
-label {
-    display: block;
-    margin: .5rem;
-    font-weight: 500;
-}
-
 input, select {
+    margin: 0;
     width: 100%;
     padding: 0.5rem;
     border: 1px solid var(--border-color);

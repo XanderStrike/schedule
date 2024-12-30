@@ -28,10 +28,9 @@
             <details class="form-section">
                 <summary>Add Employee</summary>
                 <form id="employeeForm">
-                    <label for="employeeName">Name:</label>
-                    <input type="text" id="employeeName" name="employeeName" required>
-                    <label for="availabilityDay">Day:</label>
+                    <input type="text" id="employeeName" name="employeeName" placeholder="Employee Name" required>
                     <select id="availabilityDay" name="availabilityDay" required>
+                        <option value="" disabled selected>Select Day</option>
                         <option value="Monday">Monday</option>
                         <option value="Tuesday">Tuesday</option>
                         <option value="Wednesday">Wednesday</option>
@@ -40,10 +39,8 @@
                         <option value="Saturday">Saturday</option>
                         <option value="Sunday">Sunday</option>
                     </select>
-                    <label for="availabilityStartTime">Start:</label>
-                    <input type="time" id="availabilityStartTime" name="availabilityStartTime" required>
-                    <label for="availabilityEndTime">End:</label>
-                    <input type="time" id="availabilityEndTime" name="availabilityEndTime" required>
+                    <input type="time" id="availabilityStartTime" name="availabilityStartTime" placeholder="Start Time" required>
+                    <input type="time" id="availabilityEndTime" name="availabilityEndTime" placeholder="End Time" required>
                     <button type="submit">Add Employee</button>
                 </form>
             </details>
@@ -68,10 +65,9 @@
         <details class="form-section">
             <summary>Add Shift</summary>
             <form id="shiftForm">
-                <label for="shiftName">Shift Name:</label>
-                <input type="text" id="shiftName" name="shiftName" required>
-                <label for="shiftDay">Day:</label>
+                <input type="text" id="shiftName" name="shiftName" placeholder="Shift Name" required>
                 <select id="shiftDay" name="shiftDay" required>
+                    <option value="" disabled selected>Select Day</option>
                     <option value="Monday">Monday</option>
                     <option value="Tuesday">Tuesday</option>
                     <option value="Wednesday">Wednesday</option>
@@ -80,10 +76,8 @@
                     <option value="Saturday">Saturday</option>
                     <option value="Sunday">Sunday</option>
                 </select>
-                <label for="startTime">Start:</label>
-                <input type="time" id="startTime" name="startTime" required>
-                <label for="endTime">End:</label>
-                <input type="time" id="endTime" name="endTime" required>
+                <input type="time" id="startTime" name="startTime" placeholder="Start Time" required>
+                <input type="time" id="endTime" name="endTime" placeholder="End Time" required>
                 <button type="submit">Add Shift</button>
             </form>
         </details>
